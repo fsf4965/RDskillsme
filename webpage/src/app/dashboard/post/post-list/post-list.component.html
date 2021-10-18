@@ -1,0 +1,84 @@
+<!-- list all post -->
+
+<div class="placetable"><div class="textbox">P O S T H U B</div></div>
+<div class="table-format">
+  <div class="example-header">
+    <mat-form-field appearance="standard">
+      <mat-label><mat-icon>search</mat-icon> Search... </mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. javascript" #input>
+    </mat-form-field>
+  </div>
+ 
+  <!--Publish a new POST-->
+  <button   *ngIf='publishPost' (click)='showPublish(false)'>Hide Publish a New Post</button>
+  <button   *ngIf='!publishPost' (click)='showPublish(true)'>Publish a New Post</button>
+  
+  <div [hidden]="!publishPost">
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <form>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" ngModel required [(ngModel)]="post.title" name="title"/>
+        </div>
+  
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" style="height:200px;"ngModel required [(ngModel)]="post.description" name="description"></textarea>
+        </div>
+        
+        <button (click)="savePost()" class="btn btn-success">Submit</button>
+      </form>
+      </div>
+  
+      <div *ngIf="submitted">
+        <h4>Post was submitted successfully!</h4>
+        <button class="btn btn-success" (click)="newPost()">Publish a New Post</button>
+      </div>
+    </div>
+  </div>
+  
+
+
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="post_id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.post_id}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+      <mat-cell *matCellDef="let element" [routerLink]="[element.post_id]"> {{element.title}} </mat-cell>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+    </ng-container>
+
+    <!-- Likes Column -->
+    <ng-container matColumnDef="likes">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Likes </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.likes}} </mat-cell>
+    </ng-container>
+        
+    <!-- Dislikes Column -->
+    <ng-container matColumnDef="dislikes">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Disikes </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.dislikes}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                  showFirstLastButtons 
+                  aria-label="Select page of periodic elements">
+    </mat-paginator>
+
+ 
+</div> 

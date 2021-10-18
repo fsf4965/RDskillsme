@@ -1,0 +1,46 @@
+<!-- publish a new project, but currently now used in this web -->
+
+<div>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <label for="name">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            required
+            [(ngModel)]="project.name"
+            name="name"
+          />
+        </div>
+  
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input
+            class="form-control"
+            id="description"
+            required
+            [(ngModel)]="project.description"
+            name="description"
+          />
+        </div>
+        <div class="form-group">
+            <label for="typeAllowed">TypeAllowed(progamming language)</label>
+            <input
+              class="form-control"
+              id="typeAllowed"
+              required
+              [(ngModel)]="project.typeAllowed"
+              name="typeAllowed"
+            />
+          </div>
+        <button (click)="saveProject()" class="btn btn-success">Publish</button>
+      </div>
+  
+      <div *ngIf="submitted">
+        <h4>Project was submitted successfully!</h4>
+        <button class="btn btn-success" (click)="newProject()">Publish a New Post</button>
+      </div>
+    </div>
+  </div>

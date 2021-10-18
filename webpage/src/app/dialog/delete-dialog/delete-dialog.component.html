@@ -1,0 +1,9 @@
+<!--this is the delete account dialog box -->
+
+<div mat-dialog-content>
+    <p>Are you sure you want to delete this?</p>
+</div>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Delete</button>
+</mat-dialog-actions>

@@ -1,0 +1,10 @@
+<!--this is the activate account dialog box -->
+
+<div mat-dialog-content>
+    <p>Are you sure you want to activate this account?</p>
+    <p>(Please make sure you have already checked the account's student proof is valid)</p>
+</div>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>NO</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>YES</button>
+</mat-dialog-actions>

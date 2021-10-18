@@ -1,0 +1,91 @@
+<!--this is page diplays the my devloping project detail and upload files-->
+
+<p>{{ messaged }}</p>
+
+<div *ngIf="!messaged">
+    <div  *ngIf="currentDev_Project.id" class="edit-form">
+      <div class="table-detail">
+        <mat-card class="example-card">
+          <mat-card-title-group>
+            <mat-card-title ><h3>My Developing Project {{currentDev_Project.id}} Detail</h3></mat-card-title>
+            <mat-card-subtitle>Created Date: {{currentProject.createdAt| date: 'dd/MM/yyyy'}} </mat-card-subtitle>
+          </mat-card-title-group>
+          <mat-card-content>
+            <p>Project Name: {{currentProject.name}}</p>
+            <p>Project Description: {{currentProject.description}} </p>
+            <!-- Account ID -->
+            <p *ngIf="getAccountType()">Account ID: {{currentDev_Project.accountId}}</p>
+          </mat-card-content>
+          <button *ngIf="!getAccountType()" class="delete" (click)="openDialogDeleteProject()">
+            Delete this Developing Project
+          </button>
+        </mat-card>
+      </div>
+
+      <br/>
+      <br/>
+      
+      <mat-card class="example-card">
+        
+        <mat-card-content>
+          <!-- upload files to the current my dev_pro-->
+          <div *ngIf="currentDev_Project.isuploaded">
+          <h3>Your Files</h3>
+          File Name: {{currentDev_Project.name}}
+          <a href="http://localhost:8080/skillsme/dev_projects/download/{{currentDev_Project.id}}"> Download</a>
+          <button (click)="replace()"> Replace the Current File</button>
+          <br/>
+          </div>
+
+          <div *ngIf="replaced">
+            <div *ngIf="currentFileUpload" class="progress">
+              <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
+                {{progress.percentage}}%
+              </div>
+            </div>
+
+            <label class="btn btn-default">
+            <input type="file" (change)="selectFile($event)">
+            </label>
+
+            <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload File</button>
+          </div>
+
+          <div *ngIf="!currentDev_Project.isuploaded">
+            <div *ngIf="currentFileUpload" class="progress">
+              <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
+                {{progress.percentage}}%
+              </div>
+            </div>
+
+            <label class="btn btn-default">
+            <input type="file" (change)="selectFile($event)">
+            </label>
+
+            <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload File</button>
+          </div>
+
+           <div class="my-2">
+            <app-feedback-list [currentDev_ProjectID]='currentDev_ProjectID'></app-feedback-list>
+           </div>
+       
+        </mat-card-content>
+      </mat-card>
+     
+      <button (click)="goToMy_Dev()">Back to My Developing Project</button>
+
+
+      <p>{{ message }}</p>
+
+    </div>
+  
+    <div *ngIf="!currentDev_Project.id">
+      <br />
+      <p>Cannot access this Project...</p>
+    </div>
+
+  </div>
+
+  

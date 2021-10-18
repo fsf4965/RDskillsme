@@ -1,0 +1,130 @@
+<!-- list all the published projects in admin page -->
+
+<div class="placetable"><div class="textbox">P R O J E C T H U B</div></div>
+<div class="table-format">
+  <div class="example-header">
+    <mat-form-field appearance="standard">
+      <mat-label><mat-icon>search</mat-icon> Search... </mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. javascript" #input>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="getAccountType()">
+    <button   *ngIf='publishProject' (click)='showPublish(false)'>Hide Publish a New Project</button>
+    <button   *ngIf='!publishProject' (click)='showPublish(true)'>Publish a New Project</button>
+    
+    <div [hidden]="!publishProject">
+      <div class="submit-form">
+        <div *ngIf="!submitted">
+          <form>
+          <div class="form-group">
+            <label for="name">Title</label>
+            <input type="text" class="form-control" id="name" ngModel required [(ngModel)]="project.name" name="name"/>
+          </div>
+    
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" style="height:200px;"ngModel required [(ngModel)]="project.description" name="description"></textarea>
+          </div>
+          <div class="form-group">
+              <label for="typeAllowed">TypeAllowed(progamming language)</label>
+              <input class="form-control" id="typeAllowed" ngModel required [(ngModel)]="project.typeAllowed" name="typeAllowed" />
+            </div>
+          <button (click)="saveProject()" class="btn btn-success">Publish</button>
+        </form>
+        </div>
+    
+        <div *ngIf="submitted">
+          <h4>Project was submitted successfully!</h4>
+          <button class="btn btn-success" (click)="newProject()">Publish a New Post</button>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+
+  <div>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" matSortActive="likes" matSortDirection="desc">
+
+      <!-- Project Number Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Project Number </mat-header-cell>
+        <mat-cell *matCellDef="let element" > {{element.id}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element" > {{element.name}} </mat-cell>
+      </ng-container>
+
+      <!-- Description Column 
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef > Description </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+      </ng-container>
+      -->
+
+      <!-- Recommend Progamming Language Column -->
+      <ng-container matColumnDef="typeAllowed">
+        <mat-header-cell *matHeaderCellDef >Recommend Progamming Language </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.typeAllowed}} </mat-cell>
+      </ng-container>
+
+      <!-- Project Publish time Column -->
+      <ng-container matColumnDef="createdAt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Publish Date </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.createdAt| date: 'dd/MM/yyyy'}} </mat-cell>
+      </ng-container>
+
+      <!-- Likes Column -->
+      <ng-container matColumnDef="likes">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Likes</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.likes}} </mat-cell>
+      </ng-container>
+          
+      <!-- Dislikes Column -->
+      <ng-container matColumnDef="dislikes">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Disikes</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.dislikes}} </mat-cell>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Edit </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click to Edit" class="iconbutton"
+            color="primary" (click)="openDialogEditProject(element.id,element.name, element.description,element.typeAllowed)">
+            <mat-icon>edit</mat-icon>
+          </button> </mat-cell>
+      </ng-container>
+
+      <!-- Delete Project-->
+      <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Delete </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click to Delete" class="iconbutton"
+            (click)="openDialogDeleteProject(element.id)" color="warn">
+            <mat-icon>delete</mat-icon>
+          </button> </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [cdkDetailRow]="row" [cdkDetailRowTpl]="tpl"></mat-row>
+      
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                    showFirstLastButtons 
+                    aria-label="Select page of periodic elements">
+    </mat-paginator>
+
+   <!-- Description Column --> 
+    <ng-template #tpl let-element>
+      <div class="element-description" [@detailExpand] style="overflow: hidden">
+      Project Description: {{element.description}}
+      </div>
+    </ng-template>
+    
+  </div>
+
+</div>
+

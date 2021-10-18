@@ -1,0 +1,11 @@
+.mat-card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+}
+.mat-card-subtitle{
+    font-size: 11px;
+}
+.mat-card-content{
+    font-size: 14px;
+}

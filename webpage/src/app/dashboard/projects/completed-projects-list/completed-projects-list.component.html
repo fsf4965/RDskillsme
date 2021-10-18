@@ -1,0 +1,71 @@
+  <!-- list all the completed dev_pro file related to the current project -->
+  
+  <div class="table-format">
+    <h3>Completed Project List</h3>
+    <div class="example-header">
+      <mat-form-field appearance="standard">
+        <mat-label><mat-icon>search</mat-icon> Search... </mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. javascript" #input>
+      </mat-form-field>
+    </div>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef > File ID </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="filename">
+        <mat-header-cell *matHeaderCellDef > File Name </mat-header-cell>
+        <mat-cell *matCellDef="let element" > {{element.name}} </mat-cell>
+      </ng-container>
+    
+      <!-- Description Column 
+      <ng-container matColumnDef="likes">
+        <mat-header-cell *matHeaderCellDef > Likes</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      </ng-container>
+      -->
+
+      <!-- File Publisher Name Column -->
+      <ng-container matColumnDef="publisher">
+        <mat-header-cell *matHeaderCellDef > Publisher Account</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.accountEmail}} </mat-cell>
+      </ng-container>
+
+      <!--Recommend Progamming Language Column -->
+      <ng-container matColumnDef="downloads">
+        <mat-header-cell *matHeaderCellDef > Download File </mat-header-cell>
+        <mat-cell *matCellDef="let element"><a href="http://localhost:8080/skillsme/dev_projects/download/{{element.id}}"> <mat-icon>get_app</mat-icon></a> </mat-cell>
+      </ng-container>
+
+      <!--Upload Feedback Column -->
+      <ng-container matColumnDef="uploads">
+        <mat-header-cell *matHeaderCellDef > Upload Feeback </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-raised-button color="primary" (click)="upload(element.id)">Upload</button>
+        </mat-cell>
+      </ng-container>
+    
+      <!--Publish Time Column -->
+      <ng-container matColumnDef="comments">
+        <mat-header-cell *matHeaderCellDef > View Comments </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" (click)="viewComments(element.id)">Comments</button> </mat-cell>
+      </ng-container>
+    
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      
+      
+    </table>
+
+    <!-- view comments related to the clicked completed dev_pro -->
+    <div *ngIf='viewcomment'> 
+      <h4></h4>
+        <app-dev-pro-comment [dev_projectid]="dev_projectId"></app-dev-pro-comment>
+    </div>
+    
+  </div>
+ 

@@ -1,0 +1,127 @@
+<!-- view the current project detail -->
+
+  <div >
+    <div *ngIf="currentProject.id" class="edit-form">
+
+      <div *ngIf="!getAccountType()">
+        <div class="table-detail">
+          <mat-card class="example-card">
+            <mat-card-title-group>
+              <mat-card-title ><h3>Project {{currentProject.id}}--{{currentProject.name}}</h3></mat-card-title>
+              <mat-card-subtitle>Publish Date: {{currentProject.createdAt| date: 'dd/MM/yyyy'}}</mat-card-subtitle>
+            </mat-card-title-group>
+            <mat-card-content>
+              <p>Description: {{currentProject.description}}</p>
+              <p>Recommend Pragramming Language For This Project is: {{currentProject.typeAllowed}}</p>
+            </mat-card-content>
+
+             <!-- like the current the project -->
+            <button (click)="addlike()"><i class="fa fa-thumbs-up">{{currentProject.likes}}</i></button>
+            <!-- dislike the current the project -->
+            <button (click)="adddislike()"><i class="fa fa-thumbs-down">{{currentProject.dislikes}}</i></button>
+          </mat-card>
+        </div>
+
+         <br />
+         <br />
+         <!-- display all completed my dev_project related to the current project -->
+         <app-completed-projects-list [projectID]='currentProjectid'>  </app-completed-projects-list>
+
+         <br />
+         <br />
+         <div class="table-detail">
+          <mat-card class="example-card">
+            <mat-card-title-group>
+              <mat-card-title ><h3>Guidelines for providing feedback</h3></mat-card-title>
+            </mat-card-title-group>
+            <mat-card-content>
+              <p>- Please provide your feedback in a doc-type(.docx or other) or pdf-type(.pdf) file </p>
+              <p>- When talking about certain parts of the code, please provide the line of code and file path you are referring to.</p>
+              <p>- Please be clear in what you are talking about and explain clearly.</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+         <br />
+         <br />
+         <!-- add the current project to my devloping project -->
+         <button (click)="addToMy_Dev()">Join This Project</button>
+         <!-- jump to the my developing project page -->
+         <button (click)="goToMy_Dev()">Go to My Developing Project</button>
+         <!-- go back to the project list page -->
+         <button (click)="gotoProjectsList()">Back to Plaza</button>
+        
+        
+       
+       
+
+         <p>{{ message }}</p>
+
+      </div>
+
+      <div *ngIf="getAccountType()">
+        <h4>Project {{currentProject.id}}</h4>
+        <form>
+          <!-- Project Name -->
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              [(ngModel)]="currentProject.name"
+              name="name"
+              [readonly]="!editable"/>
+          </div>
+
+          <!-- Project Description -->
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input
+              type="text"
+              class="form-control"
+              id="description"
+              [(ngModel)]="currentProject.description"
+              name="description"
+              [readonly]="!editable"/>
+          </div>
+    
+          <!-- Project Recommend Programming Language -->
+          <div class="form-group">
+              <label for="typeAllowed">Recommend Programming Language</label>
+              <input
+                type="text"
+                class="form-control"
+                id="typeAllowed"
+                [(ngModel)]="currentProject.typeAllowed"
+                name="typeAllowed"
+                [readonly]="!editable"/>
+          </div>
+        </form>
+        
+        <!-- jump to the my developing project page -->
+        <button (click)="goToMy_Dev()">Go to My Developing Project</button>
+        <!-- go back to the project list page -->
+        <button (click)="gotoProjectsList()">Back to Plaza</button>
+        
+       
+        <!-- reset the current project detail -->
+        <button *ngIf="getAccountType()" (click)="resetForm()">Reset</button>
+        <!-- update the current project detail -->
+        <button *ngIf="getAccountType()" type="submit" class="update" (click)="updateProject()">Update</button>
+        <!-- delete the current project -->
+        <button *ngIf="getAccountType()" class="delete" (click)="openDialogDeleteProject()">Delete</button>
+
+        <p>{{ message }}</p>
+      </div>
+    
+      
+
+    </div>  
+  </div>
+  
+  <div *ngIf="!currentProject.id">
+    <br />
+    <p>Cannot access this Project...</p>
+  </div>
+ 

@@ -1,0 +1,19 @@
+<!-- list files uploaded to the current my dev_pro -->
+
+<h3>Your feedbacks</h3>
+<ul>
+  <button  *ngIf='showFeedback' (click)='showFeedbacks(false)'>Hide Feedbacks</button>
+
+  <button  *ngIf='!showFeedback' (click)='showFeedbacks(true)'>Show Files</button>
+  
+  <div [hidden]="!showFeedback">
+    <div class="panel panel-primary">
+      <div class="panel-heading">List of Feedback</div>
+      <div *ngFor="let file of feedbackUploads | async">
+        <div class="panel-body">
+          <app-feedback-details [feedbackUpload]='file' ></app-feedback-details>
+        </div>
+      </div>
+    </div>
+  </div>
+</ul>

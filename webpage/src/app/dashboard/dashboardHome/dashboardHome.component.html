@@ -1,0 +1,64 @@
+<body>
+<!--the navagation bar for different user types, noraml user and admin -->
+<div >
+  <h1 class="title">Skillsme University</h1>
+  <nav *ngIf="!getAccountType()">
+    <ul class = applinks>
+      <li><a routerLink="./" routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+
+      <li> <a routerLink="./projects" routerLinkActive="active">Project Plaza</a></li>
+
+      <li> <a routerLink="./posts" routerLinkActive="active">Post Plaza</a></li>
+
+      <li><a routerLink="./dev_projects" routerLinkActive="active">My Developing Project</a></li>
+  </ul>
+      <div class="dropdown" style="float: right;">
+        <a >Settings
+          <i class="fa fa-caret-down"></i>
+        </a>
+        <div class="dropdown-content">
+          <a class="dropdown-item" routerLink="./settings" routerLinkActive="active"><mat-icon>settings</mat-icon>Settings</a>
+          <a class="dropdown-item" (click)="logout()" routerLink="/"><mat-icon>exit_to_app</mat-icon>Log out</a>
+        </div>
+      </div> 
+
+    <hr style="width:100%;text-align:left;margin-left:0">
+  </nav>
+
+
+  <nav *ngIf="getAccountType()">
+   
+
+    <ul class = applinksuser>
+      <li> <a routerLink="./" routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+    <li><a routerLink="./projectsAdmin" routerLinkActive="active">Manage Projects</a></li>
+    <li><a routerLink="./accounts" routerLinkActive="active">Manage Accounts</a></li>
+    </ul>
+    <!--
+      <a routerLink="./posts" routerLinkActive="active">Manage Post</a>
+      <a routerLink="./dev_projects" routerLinkActive="active">Manage Developing Projects</a>
+    -->
+    
+    
+
+    <div class="dropdown" style="float: right;">
+      <a >Settings
+        <i class="fa fa-caret-down"></i>
+      </a>
+      <div class="dropdown-content">
+        <a class="dropdown-item" routerLink="./settings" routerLinkActive="active"><mat-icon>settings</mat-icon>Settings</a>
+        <a class="dropdown-item" (click)="logout()" routerLink="/"><mat-icon>exit_to_app</mat-icon>Log out</a>
+      </div>
+    </div> 
+    <hr style="width:100%;text-align:left;margin-left:0">
+  </nav>
+</div>
+
+<div class="main">
+  <router-outlet></router-outlet>
+</div>
+</body>
+
+

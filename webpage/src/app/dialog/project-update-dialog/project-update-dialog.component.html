@@ -1,0 +1,37 @@
+<!-- this is the project update dialog box-->
+
+<h1 mat-dialog-title></h1>
+<form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+  <div mat-dialog-content>
+    <p>Update Project</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Project Name</mat-label>
+      <input matInput formControlName="name"  required class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+      <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+        <mat-error *ngIf="f.name.errors.required">Project Name is required</mat-error>
+    </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Project Description</mat-label>
+        <input matInput formControlName="description"  required class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+        <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+            <mat-error *ngIf="f.description.errors.required">Project Description is required</mat-error>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Recommended Programming Language</mat-label>
+        <input matInput formControlName="typeAllowed"  required class="form-control" [ngClass]="{ 'is-invalid': submitted && f.typeAllowed.errors }">
+        <div *ngIf="submitted && f.typeAllowed.errors" class="invalid-feedback">
+            <mat-error *ngIf="f.typeAllowed.errors.required">Recommended Programming Language is required</mat-error>
+        </div>
+    </mat-form-field>
+
+    <button mat-button  cdkFocusInitial>Save</button>
+  </div>
+</form>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

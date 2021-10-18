@@ -1,0 +1,39 @@
+<!-- display the comment list related to the current post -->
+
+<div class="comments" *ngIf="postComment!==undefined">
+    <h6 *ngIf="postComment.length<1">No Comments found</h6>
+    <ul *ngIf="postComment.length>0">
+        <li *ngFor="let post of postComment; let i = index;">
+            <div class="col-12 col-sm-12 comment-container">
+                <p style="font-size: larger;background-color:gainsboro;">{{post.commentTxt}}</p>
+                    <div class="actions">
+                        <span>Commenter:{{post.commenterEmail}} | </span>
+                        <span>{{post.createdAt | date: 'dd/MM/yyyy'}}</span>
+                        <span class="divider"></span>
+                        
+                        <button class="btn btn-sm btn-info" (click)="replyPost_Comment(post.id,i)">
+                            Reply
+                        </button>
+                        <span class="divider"></span>
+                        <button *ngIf="isowner(post)" class="btn btn-sm btn-danger" (click)="openDialogDeleteComment(post.id)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                </div>
+                <div class="childCommentBox">
+                    <div datacontainer></div>
+                    <ul *ngIf="post.replyComment.length>0">
+                        <li *ngFor="let rl of post.replyComment">
+                            <div class="col-12 col-sm-12 comment-container">
+                                    <p style="background-color:rgb(240, 239, 239);">{{jsonDecode(rl).commentTxt}}</p>
+                                    <div style="font-size: smaller;" class="actions">
+                                    <span>Commenter:{{jsonDecode(rl).commenterEmail}} | </span>
+                                    <span>{{jsonDecode(rl).publishDate | date: 'dd/MM/yyyy'}} </span>
+                                    </div>
+                            </div>
+                        </li>
+                    </ul>            
+                </div>                
+            </div>
+        </li>
+    </ul>
+</div>

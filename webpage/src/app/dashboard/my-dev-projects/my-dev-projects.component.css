@@ -1,0 +1,97 @@
+button{
+  font-size: 1.0rem;
+  padding: 0.5rem;
+}
+
+
+@font-face {
+  font-family: 'chonburi';
+  src: url("/assets/fonts/Chonburi-Regular.ttf") format('truetype');
+}
+
+button{
+  font-size: 1.0rem;
+  padding: 0.5rem;
+}
+
+.placetable{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("/assets/images/projects/bg.png");
+  width: 100%;
+  height:  500px;
+  text-align: center;
+}
+.textbox{
+  box-sizing: border-box;
+  background-color: transparent;
+  width: 1400px;
+  height: 250px;
+  color: azure;
+  font-family: 'chonburi';
+  border: 4px solid ivory;
+  font-size: 150px;
+  text-align: center;
+  animation: fadein 2s;
+  
+}
+@keyframes fadein {
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-moz-keyframes fadein { /* Firefox */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-o-keyframes fadein { /* Opera */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+@font-face {
+  font-family: 'bebas';
+  src: url("/assets/fonts/BebasNeue-Regular.ttf") format('truetype');
+}
+
+button{
+  font-family: 'bebas';
+  background-color: #f3bbc0;
+  font-size: 1.0rem;
+  padding: 0.5rem;
+}
+.mat-row:nth-child(even) button{
+  background-color: #ffffff;
+  font-size: 1.0rem;
+  padding: 0.5rem;
+}
+
+.mat-row:nth-child(even){
+  background-color: #f3bbc0;
+}
+
+.mat-row:nth-child(odd){
+  background-color:#ffffff;
+}
+
+ 

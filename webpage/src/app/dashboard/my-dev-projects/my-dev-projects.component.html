@@ -1,0 +1,55 @@
+<!-- this page is used to list all the project that the user has joined -->
+<div class="placetable"><div class="textbox">P R O J E C T S</div></div>
+<div class="table-format">
+  <div class="example-header">
+    <mat-form-field appearance="standard">
+      <mat-label><mat-icon>search</mat-icon> Search... </mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. javascript" #input>
+    </mat-form-field>
+  </div>
+    
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    
+      <!-- My Project ID Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> My Project No. </mat-header-cell >
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell >
+      </ng-container>
+    
+
+      <!-- Project ID Column -->
+      <ng-container matColumnDef="projectName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Project Name </mat-header-cell >
+          <mat-cell *matCellDef="let element" > {{element.projectName}} </mat-cell >
+      </ng-container>
+      
+      <!-- feedback Column
+      <ng-container matColumnDef="feedback">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Feedback</mat-header-cell >
+        <mat-cell *matCellDef="let element"> {{element.feedback}} </mat-cell >
+      </ng-container>
+      -->
+
+      <!-- file is uploaded or not Column -->
+      <ng-container matColumnDef="isuploaded">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Upload Status </mat-header-cell >
+        <mat-cell *matCellDef="let element" > {{element.isuploaded}} </mat-cell >
+      </ng-container>
+    
+      <!-- Upload File Button -->
+      <ng-container  matColumnDef="uploadfuncion">
+        <mat-header-cell *matHeaderCellDef> View Detail/Upload </mat-header-cell >
+        <mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" (click)="UploadFile(element.id)">View/Upload</button> </mat-cell >
+      </ng-container>
+    
+    
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                    showFirstLastButtons 
+                    aria-label="Select page of periodic elements">
+    </mat-paginator>
+
+</div>

@@ -1,0 +1,17 @@
+<div *ngIf="isValid()">
+  <div class="wrapper">
+    <nav>
+      <div class="logo"><img src="assets/images/logobeta.png" width= "242" height="56"/></div>
+      <ul class = applinks>
+      <li> <a routerLink="/about" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/contact" routerLinkActive="active">About us</a></li>
+      <div class="loginlink"><li><a routerLink="/login" routerLinkActive="active">Login</a></li></div>
+      </ul>
+    </nav></div>
+  </div>
+    <div [@routeAnimation]="getAnimationData(routerOutlet)" >
+      <router-outlet #routerOutlet="outlet"></router-outlet>
+    </div>
+  
+  
+  

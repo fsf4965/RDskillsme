@@ -1,0 +1,84 @@
+<!-- admin can use this page to manage website accounts, admin can view all account details, activate/delete an account, help user reset password-->
+<div class="placetable"><div class="textbox">A C C O U N T S</div></div>
+<div class="table-format">
+  <div class="example-header">
+    <mat-form-field appearance="standard">
+      <mat-label><mat-icon>search</mat-icon> Search... </mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. javascript" #input>
+    </mat-form-field>
+    <mat-hint>Account No 1,2,3 are testing account, no student certificate file</mat-hint>
+  </div>
+    
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" matSortActive="isactivated" matSortDirection="asc">
+    
+      <!-- Account Number Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Account No. </mat-header-cell>
+        <mat-cell *matCellDef="let element" > {{element.id}} </mat-cell>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="Name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element" > {{element.firstName}} {{element.lastName}}</mat-cell>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+      </ng-container>
+    
+      <!--Password Column
+      <ng-container matColumnDef="password">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Password </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.password}} </mat-cell>
+      </ng-container> -->
+    
+      <!-- Univeristy Column -->
+      <ng-container matColumnDef="university">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> University </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.university}} </mat-cell>
+      </ng-container>
+
+      <!-- Student Certificate File Column -->
+      <ng-container matColumnDef="prooffile">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Student Certificate </mat-header-cell>
+        <mat-cell *matCellDef="let element" > <a href="http://localhost:8080/skillsme/proof_files/{{element.id}}">Download</a> </mat-cell>
+      </ng-container>
+      
+      <!-- Status Column -->
+          <ng-container matColumnDef="isactivated">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Activate Status </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.isactivated}} </mat-cell>
+        </ng-container>
+
+      <!-- Activate Account Button -->
+      <ng-container matColumnDef="activatefunction">
+        <mat-header-cell *matHeaderCellDef > Activate Account </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <button mat-raised-button (click)="openActivateDialog(element.email)">Activate</button> </mat-cell>
+      </ng-container>
+
+      <!-- Reset Password Button -->
+      <ng-container  matColumnDef="updatefunction">
+          <mat-header-cell *matHeaderCellDef> Reset Password </mat-header-cell>
+          <mat-cell *matCellDef="let element"> <button mat-raised-button (click)="openDialog(element.email)">Reset</button> </mat-cell>
+      </ng-container>
+
+      <!-- Delete Button -->
+      <ng-container  matColumnDef="deletefunction">
+          <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+          <mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" (click)="openDialogDelete(element.email)">Delete</button> </mat-cell>
+      </ng-container>
+      
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </table>
+
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                    showFirstLastButtons 
+                    aria-label="Select page of periodic elements">
+    </mat-paginator>
+    
+</div>

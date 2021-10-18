@@ -1,0 +1,22 @@
+<!-- this is the account reset password dialog box-->
+
+<h1 mat-dialog-title>Hi </h1>
+<form [formGroup]="resetForm" (ngSubmit)="onSubmit()">
+  <div mat-dialog-content>
+    <p>Please input the new Password</p>
+    <mat-form-field appearance="fill">
+      <mat-label>New Password</mat-label>
+      <input matInput formControlName="password"  required class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <mat-error *ngIf="f.password.errors.required">Password is required</mat-error>
+        <mat-error *ngIf="f.password.errors.pattern">Password must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters</mat-error>
+      </div>
+    </mat-form-field>
+
+    <button mat-button  cdkFocusInitial>Submit</button>
+  </div>
+</form>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

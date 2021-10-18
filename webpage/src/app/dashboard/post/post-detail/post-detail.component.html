@@ -1,0 +1,82 @@
+<!-- display current post detail -->
+
+<div>  
+    <div *ngIf="currentPost.post_id" class="edit-form">
+      <!--normal user view-->
+      <mat-card  *ngIf="!isowner" class="example-card">
+        <mat-card-title-group>
+          <mat-card-title ><h3>Post {{currentPost.post_id}}</h3></mat-card-title>
+          <mat-card-subtitle>Created Date: {{currentPost.createdAt| date: 'dd/MM/yyyy'}} </mat-card-subtitle>
+        </mat-card-title-group>
+        <mat-card-content>
+          <p>Post Title: {{currentPost.title}}</p>
+          <p>Post Description: {{currentPost.description}} </p>
+        </mat-card-content>
+
+        <!-- like the current the post -->
+        <button (click)="addlike()"><i class="fa fa-thumbs-up">{{currentPost.likes}}</i></button>
+        <!-- dislike the current the post -->
+        <button (click)="adddislike()"><i class="fa fa-thumbs-down">{{currentPost.dislikes}}</i></button>
+      </mat-card>
+      
+      <!-- post owner view-->
+      <mat-card  *ngIf="isowner" class="example-card">
+        <mat-card-title-group>
+          <mat-card-title ><h3>Post {{currentPost.post_id}}</h3></mat-card-title>
+          <mat-card-subtitle>Created Date: {{currentPost.createdAt| date: 'dd/MM/yyyy'}} </mat-card-subtitle>
+        </mat-card-title-group>
+
+        <mat-card-content>
+          <form>
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                [(ngModel)]="currentPost.title"
+                name="title"
+              />
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input
+                type="text"
+                class="form-control"
+                id="description"
+                [(ngModel)]="currentPost.description"
+                name="description"
+              />
+            </div>
+      
+          </form>
+        </mat-card-content>
+
+         <!-- reset the current post detail -->
+         <button (click)="resetForm()">Reset</button>
+         <!-- update the current post detail -->
+         <button type="submit" class="update" (click)="updatePost()">Update</button>
+         <!-- delete the current post -->
+         <button class="delete" (click)="openDialogDeletePost()">Delete</button>
+
+      </mat-card>
+
+      <!--view the comments-->
+      <button mat-raised-button color="primary" (click)="viewComments(currentPost.post_id)">Show Comments</button>
+      <!--go back to the post plaza-->
+      <button (click)="gotoPostsList()">Back to Post Plaza</button>
+
+      <div *ngIf='viewcomment'> 
+        <app-post-comment [postid]="postid"></app-post-comment>
+      </div>
+      
+      <p>{{ message }}</p>
+    </div>
+
+    <!--no such post-->
+    <div *ngIf="!currentPost.post_id">
+      <br />
+      <p>Cannot access this Post...</p>
+    </div>
+
+  </div>
