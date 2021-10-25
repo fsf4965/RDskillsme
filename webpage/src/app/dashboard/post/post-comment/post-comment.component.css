@@ -1,5 +1,9 @@
-body{
-  background: #e1e1e1;
+.container{
+  background-color: transparent;
+  box-shadow: inset 0 0 2000px rgba(163, 226, 241, 0.5),;
+  backdrop-filter: blur(10px);
+  font-family: 'Roboto', sans-serif;
+  border-radius: 15px;
 }
 .card{
   padding: 25px 25px;
@@ -9,6 +13,12 @@ body{
   border-bottom: #EEE 1px solid;
   margin-bottom: 20px;
 }
+comment-box{
+  background-color: transparent;
+}
+app-comments{
+  background-color: transparent;
+}
 .comment-container .left{
   width:50px;
   height: 50px;
@@ -17,8 +27,7 @@ body{
 .comment-container .right{
   margin-left: 60px;
 }
-.comment-container p{
-  background: #e9ebee;
+.comment-container p{ 
   padding: 6px 10px;
 }
 textarea.form-control{

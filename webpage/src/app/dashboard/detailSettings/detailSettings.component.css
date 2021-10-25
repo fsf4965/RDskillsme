@@ -75,6 +75,7 @@ mat-label{
     margin: 0;
     padding: 0;
     right: 20px;
+    top:89%;
     
 
 }
@@ -85,5 +86,6 @@ mat-label{
     margin: 0;
     padding: 0;
     left: 35px;
+    top:89%;
 }
 

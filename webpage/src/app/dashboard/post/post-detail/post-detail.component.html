@@ -1,5 +1,5 @@
 <!-- display current post detail -->
-
+<body>
 <div>  
     <div *ngIf="currentPost.post_id" class="edit-form">
       <!--normal user view-->
@@ -62,9 +62,9 @@
       </mat-card>
 
       <!--view the comments-->
-      <button mat-raised-button color="primary" (click)="viewComments(currentPost.post_id)">Show Comments</button>
+      <div class="buttonmash"> <button mat-raised-button color="primary" (click)="viewComments(currentPost.post_id)">Show Comments</button>
       <!--go back to the post plaza-->
-      <button (click)="gotoPostsList()">Back to Post Plaza</button>
+      <button (click)="gotoPostsList()">Back to Post Plaza</button></div>
 
       <div *ngIf='viewcomment'> 
         <app-post-comment [postid]="postid"></app-post-comment>
@@ -80,3 +80,4 @@
     </div>
 
   </div>
+  </body>
