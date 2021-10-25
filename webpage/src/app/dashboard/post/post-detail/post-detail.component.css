@@ -85,3 +85,10 @@ h3 {
 .commentview{    
 background-color: transparent;
 }
+
+.resize textarea{
+    width: 600px;
+    height: 100px;
+    overflow: scroll;
+    text-align: start;
+}
