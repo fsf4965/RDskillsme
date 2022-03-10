@@ -4,6 +4,14 @@ const cors = require("cors");
 
 const app = express();
 
+if (process.env.NODE_ENV === "production") { 
+  app.use(express.static(path.join(__dirname, "webpage/build")));
+
+  app.get('/', (req,res) => {
+   res.sendFile(path.resolve(__dirname, "webpage", "build", "index.html"))
+  });
+}
+
 var corsOptions = {
   origin: "http://localhost:4200"//8081->4200
 };
