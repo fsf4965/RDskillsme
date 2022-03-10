@@ -7,9 +7,9 @@ module.exports = app => {
     router.post("/", accounts.create);
 
     // Retrieve all Account
-    router.post("/", accounts.findAll);
+    router.get("/", accounts.findAll);
     // Retrieve a single Account with email
-    router.post("/:email", accounts.findemail);
+    router.get("/:email", accounts.findemail);
     
     // Update a Account with email
     router.put("/:email", accounts.update);
