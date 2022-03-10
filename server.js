@@ -7,10 +7,10 @@ const app = express();
 
 
 if (process.env.NODE_ENV === "production") { 
-  app.use(express.static(path.join(__dirname, "webpage/build")));
+  app.use(express.static(path.join(__dirname, "webpage/dist")));
 
   app.get('/', (req,res) => {
-   res.sendFile(path.resolve(__dirname, "webpage", "build", "index.html"))
+   res.sendFile(path.resolve(__dirname, "webpage", "dist", "index.html"))
   });
 }
 
